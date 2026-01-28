@@ -1,6 +1,7 @@
 const content = document.querySelector("#content");
-const btn = document.querySelector(".btn");
+const btn = document.querySelector(".btn-container");
 let isDrawing = false;
+let mode = "bw";
 function renderScreen() {
   content.innerHTML = "";
 
@@ -28,14 +29,10 @@ function customRenderScreen(pixels) {
   }
 }
 
-content.addEventListener("click", (e) => {
-  e.target.classList.add("painted");
-});
-
 content.addEventListener("mousedown", (e) => {
   if (e.target.classList.contains("square")) {
     isDrawing = true;
-    e.target.classList.add("painted");
+    paint(e.target);
   }
 });
 
@@ -43,7 +40,7 @@ content.addEventListener("mouseover", (e) => {
   if (!isDrawing) return;
 
   if (e.target.classList.contains("square")) {
-    e.target.classList.add("painted");
+    paint(e.target);
   }
 });
 
@@ -52,8 +49,47 @@ document.addEventListener("mouseup", (e) => {
 });
 
 btn.addEventListener("click", (e) => {
-  let result = window.prompt("Insert the number of squares:");
-  customRenderScreen(result);
+  if (e.target.dataset.action == "grid") {
+    let result = window.prompt("Insert the number of squares:");
+    customRenderScreen(result);
+  }
+
+  if (e.target.dataset.action == "bw") {
+    mode = e.target.dataset.action;
+  }
+
+  if (e.target.dataset.action == "rainbow") {
+    mode = e.target.dataset.action;
+  }
 });
+
+function getRandomColor() {
+  return {
+    r: Math.floor(Math.random() * 256),
+    g: Math.floor(Math.random() * 256),
+    b: Math.floor(Math.random() * 256),
+  };
+}
+
+function paint(e) {
+  if (!e.classList.contains("square")) {
+      return;
+    }
+    
+  if (mode !== "bw") {
+    if (e.dataset.r) {
+      e.dataset.alpha = Number(e.dataset.alpha) + 0.1;
+    } else {
+      const { r, g, b } = getRandomColor();
+      e.dataset.r = r;
+      e.dataset.g = g;
+      e.dataset.b = b;
+      e.dataset.alpha = 0.1;
+    }
+    e.style.backgroundColor = `rgba(${e.dataset.r}, ${e.dataset.g}, ${e.dataset.b}, ${e.dataset.alpha})`;
+  }else{
+    e.style.backgroundColor = "black";
+  }
+}
 
 renderScreen();

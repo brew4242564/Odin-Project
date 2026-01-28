@@ -1,21 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-a-Skechtpad</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Etch-A-Sketchpad</h1>
+      <h1>Etch-A-Sketchpad</h1>
     </header>
     <main>
-        <button class="btn">
-            New Grid            
-        </button>
-        <div id="content"></div>
+      <div class="btn-container">
+        <button class="btn" data-action="grid">New Grid</button>
+        <button class="btn" data-action="rainbow">Rainbow Mode</button>
+        <button class="btn" data-action="bw">B/W mode</button>
+      </div>
+
+      <div id="content"></div>
     </main>
-</body>
+  </body>
 </html>
