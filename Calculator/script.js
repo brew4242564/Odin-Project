@@ -24,9 +24,11 @@ grid.addEventListener("click", (e) => {
 });
 
 const setValue = (value) => {
-  if (result) {
+  if (result !== "") {
     clearValues();
+    console.log("entro aqui")
   }
+  
 
   if (!isSecond) {
     firstVal += value;
@@ -39,7 +41,7 @@ const setValue = (value) => {
 };
 
 const setOperation = (operation) => {
-  if (result) {
+  if (result !== "") {
     iterate();
   }
   operationQueue = operation;
@@ -133,7 +135,7 @@ const iterate = () => {
 
 const renderCalc = () => {
   render.innerHTML = "";
-  if (!result) {
+  if (result === "") {
     const first = document.createElement("p");
     const op = document.createElement("p");
     const second = document.createElement("p");
